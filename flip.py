@@ -36,7 +36,7 @@ for img_name in os.listdir(image_dir):
         f_img = cv2.flip(img, -1)  # flip vertical and horizontal
     else:
         print('Please choose flip type: h(horizontal), v(vertical), or vh(vertical + horizontal).')
-    save_dir = save + r'hf_' + img_name
+    save_dir = save + r'f_' + img_name
     cv2.imwrite(save_dir, f_img)
 
     filename = id.group() + 'txt'
