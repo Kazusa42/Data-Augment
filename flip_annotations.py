@@ -1,3 +1,7 @@
+"""
+This script is joined with filp.py
+"""
+
 import os
 from PIL import Image
 
