@@ -1,7 +1,6 @@
 import cv2
 import os
 import re
-from PIL import Image
 
 
 """
@@ -28,6 +27,7 @@ for img_name in os.listdir(image_dir):
     id = re.match(r'.+\.', img_name)
 
     img = cv2.imread(image_dir + img_name)  # height, width
+
     if flip_type == 'h':
         f_img = cv2.flip(img, 1)  # flip horizontal
     elif flip_type == 'v':
@@ -43,7 +43,7 @@ for img_name in os.listdir(image_dir):
     fin = open(annotations_dir + filename, 'r')
     image_name = filename.split('.')[0]
     # img = Image.open(image_dir + image_name + ".jpg")
-    xml_name = xml_dir + flip_type + r'_flip_' + image_name + '.xml'
+    xml_name = xml_dir + r'f_' + image_name + '.xml'
     with open(xml_name, 'w') as fout:
         fout.write('<annotation>' + '\n')
 
@@ -69,7 +69,7 @@ for img_name in os.listdir(image_dir):
         fout.write('\t' + '</size>' + '\n')
 
         fout.write('\t' + '<segmented>' + '0' + '</segmented>' + '\n')
-        width, height = img.size[0], img.size[1]
+        width, height = img.shape[1], img.shape[0]
         for line in fin.readlines():
             line = line.split(' ')
             fout.write('\t' + '<object>' + '\n')
