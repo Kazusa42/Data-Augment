@@ -27,7 +27,7 @@ for img_name in os.listdir(image_dir):
     # print(img_name)
     id = re.match(r'.+\.', img_name)
 
-    img = cv2.imread(image_dir + img_name)
+    img = cv2.imread(image_dir + img_name)  # height, width
     if flip_type == 'h':
         f_img = cv2.flip(img, 1)  # flip horizontal
     elif flip_type == 'v':
@@ -42,7 +42,7 @@ for img_name in os.listdir(image_dir):
     filename = id.group() + 'txt'
     fin = open(annotations_dir + filename, 'r')
     image_name = filename.split('.')[0]
-    img = Image.open(image_dir + image_name + ".jpg")
+    # img = Image.open(image_dir + image_name + ".jpg")
     xml_name = xml_dir + flip_type + r'_flip_' + image_name + '.xml'
     with open(xml_name, 'w') as fout:
         fout.write('<annotation>' + '\n')
@@ -63,8 +63,8 @@ for img_name in os.listdir(image_dir):
         fout.write('\t' + '</owner>' + '\n')
 
         fout.write('\t' + '<size>' + '\n')
-        fout.write('\t\t' + '<width>' + str(img.size[0]) + '</width>' + '\n')  # img_width
-        fout.write('\t\t' + '<height>' + str(img.size[1]) + '</height>' + '\n')  # img_height
+        fout.write('\t\t' + '<width>' + str(img.shape[1]) + '</width>' + '\n')  # img_width
+        fout.write('\t\t' + '<height>' + str(img.shape[0]) + '</height>' + '\n')  # img_height
         fout.write('\t\t' + '<depth>' + '3' + '</depth>' + '\n')
         fout.write('\t' + '</size>' + '\n')
 
